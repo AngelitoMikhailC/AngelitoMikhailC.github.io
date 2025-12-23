@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Economía Boliviana: El Shock del DS 5503</title>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
+        /* Variables de diseño */
         :root {
             --primary: #2c3e50;
             --accent: #d35400;
@@ -14,6 +13,7 @@
             --card-bg: #ffffff;
         }
 
+        /* Estilos base responsivos */
         * { box-sizing: border-box; }
         
         body {
@@ -31,27 +31,27 @@
         header {
             background: var(--primary);
             color: white;
-            padding: 2.5rem 1rem;
+            padding: 2rem 1rem;
             text-align: center;
         }
 
         header h1 {
             margin: 0;
-            font-size: clamp(1.4rem, 5vw, 2.2rem);
+            font-size: clamp(1.5rem, 5vw, 2.5rem); /* Tamaño adaptable */
             line-height: 1.2;
         }
 
-        .contact-info {
-            font-size: 0.9rem;
-            margin-top: 15px;
-            color: #bdc3c7;
+        header p {
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            opacity: 0.9;
+            margin-top: 10px;
         }
 
         .container {
             width: 95%;
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 1.5rem auto;
-            padding: 1.2rem;
+            padding: 1rem;
             background: var(--card-bg);
             border-radius: 12px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.08);
@@ -62,14 +62,15 @@
             color: var(--accent);
             border-bottom: 2px solid #eee;
             padding-bottom: 0.5rem;
-            font-size: clamp(1.1rem, 4vw, 1.6rem);
+            font-size: clamp(1.2rem, 4vw, 1.8rem);
         }
 
         /* Contenedor del Gráfico Adaptativo */
         .chart-wrapper {
             position: relative;
             width: 100%;
-            height: 450px; 
+            /* Mantiene una proporción de aspecto en móviles, altura fija en desktop */
+            height: 400px; 
             margin: 2rem 0;
             background: #fff;
             border: 1px solid #eee;
@@ -79,7 +80,7 @@
 
         @media (min-width: 768px) {
             .chart-wrapper { height: 600px; }
-            .container { padding: 3rem; margin: 3rem auto; }
+            .container { padding: 2.5rem; margin: 2.5rem auto; }
         }
 
         iframe {
@@ -88,18 +89,20 @@
             border: none;
         }
 
-        /* Formato de la Fórmula Matemática */
-        .math-container {
+        /* Bloques de texto técnico */
+        .math-block {
             background: #f1f3f5;
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin: 2rem 0;
-            text-align: center;
-            overflow-x: auto; /* Para que no se corte en móviles */
+            padding: 1.2rem;
+            border-left: 5px solid var(--accent);
+            font-family: 'Courier New', monospace;
+            overflow-x: auto; /* Scroll horizontal si la fórmula es larga en móvil */
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
         }
 
         .analysis-text {
             text-align: justify;
+            hyphens: auto;
         }
 
         footer {
@@ -111,8 +114,19 @@
             border-top: 1px solid #eee;
         }
 
-        a { color: var(--accent); text-decoration: none; }
-        a:hover { text-decoration: underline; }
+        /* Botón de acción para dispositivos móviles */
+        .btn-repo {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        .btn-repo:hover { background: var(--accent); }
 
     </style>
 </head>
@@ -121,50 +135,40 @@
 <header>
     <h1>Análisis Económico Bolivia 2025</h1>
     <p>Impacto del DS 5503: Modelo Hamiltoniano & Curva J</p>
-    <div class="contact-info">
-        Contacto: <a href="mailto:amchuquimia@umsa.bo" style="color: #fff; text-decoration: underline;">amchuquimia@umsa.bo</a>
-    </div>
 </header>
 
 <div class="container">
     <section class="analysis-text">
         <h2>Visualización del Shock Estructural</h2>
         <p>
-            Este estudio proyecta la trayectoria del PIB boliviano ante el cese de las subvenciones estatales. 
-            El análisis utiliza un <strong>Hamiltoniano de Valor Presente</strong> para capturar el colapso inicial del consumo real y un proceso 
-            <strong>ARIMA</strong> para modelar la persistencia del shock y la posterior recuperación en "J".
+            Este análisis proyecta la trayectoria del PIB tras el cese de subvenciones. El modelo combina un 
+            <strong>Hamiltoniano de Valor Presente</strong> para capturar el colapso del ingreso real y un 
+            proceso <strong>ARIMA</strong> para la persistencia del shock.
         </p>
 
         <div class="chart-wrapper">
             <iframe src="pib_bolivia_interactivo.html" title="Gráfico Interactivo Curva J"></iframe>
         </div>
 
-        <h2>Fundamentos Matemáticos del Ajuste</h2>
+        <h2>Fundamentos del Modelo</h2>
         <p>
             El retiro del subsidio ($S \to 0$) genera una discontinuidad en la variable de sombra del capital ($\lambda$), 
-            obligando a una contracción masiva del producto antes de que la inversión privada y la demanda externa 
-            estabilicen la nueva senda de crecimiento. El problema de optimización se define mediante:
+            forzando un ajuste por cantidades en el mercado interno antes de la recuperación vía demanda externa.
         </p>
         
-        <div class="math-container">
-            $$H = e^{-\rho t} U(C_t) + \lambda_t [ f(K_t, S_t) - C_t - \delta K_t ]$$
+        <div class="math-block">
+            H = e^{-&rho;t} U(C_t) + &lambda;_t [ f(K_t, S_t) - C_t - &delta;K_t ]
         </div>
 
-        <p>
-            Donde $\lambda_t$ representa el valor marginal del capital en el tiempo, el cual sufre un ajuste discreto 
-            que invalida el modelo de crecimiento basado únicamente en la demanda interna.
-        </p>
+        <div style="text-align: center; margin-top: 2rem;">
+            <a href="https://github.com/AngelitoMikhailC/AngelitoMikhailC.github.io" class="btn-repo">Ver Repositorio Completo</a>
+        </div>
     </section>
 </div>
 
 <footer>
-    <p>
-        &copy; 2025 Angel Mikhail Chuquimia<br>
-        Investigación Económica - Universidad Mayor de San Andrés (UMSA)<br>
-        Optimizado para dispositivos móviles y escritorio.
-    </p>
+    <p>&copy; 2025 Angel Mikhail Chuquimia<br>Optimizado para visualización en dispositivos móviles y escritorio.</p>
 </footer>
 
 </body>
 </html>
-
