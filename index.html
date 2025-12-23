@@ -1,12 +1,106 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>GitHub Pages OK</title>
+    <meta charset="UTF-8">
+    <title>PIB Histórico y Proyectado</title>
+
+    <!-- Plotly -->
+    <script src="https://cdn.plot.ly/plotly-2.30.0.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 20px;
+        }
+
+        #grafico {
+            width: 95%;
+            max-width: 1100px;
+            height: 550px;
+            margin: auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0px 4px 15px rgba(0,0,0,0.15);
+        }
+    </style>
 </head>
+
 <body>
-  <h1>GitHub Pages funciona</h1>
-  <p>angelitomikhailc.github.io está cargando index.html</p>
+
+<h1>PIB Histórico y Proyectado</h1>
+
+<div id="grafico"></div>
+
+<script>
+    // ======================
+    // DATOS
+    // ======================
+    const aniosHistoricos = [2015,2016,2017,2018,2019,2020,2021,2022];
+    const pibHistorico = [250,255,260,265,270,260,275,280];
+
+    const aniosProyectados = [2023,2024,2025,2026];
+    const pibProyectado = [285,290,295,300];
+
+    // ======================
+    // TRAZAS
+    // ======================
+    const historico = {
+        x: aniosHistoricos,
+        y: pibHistorico,
+        mode: "lines+markers",
+        name: "PIB Histórico",
+        line: { color: "blue", width: 3 },
+        marker: { size: 7 },
+        hovertemplate:
+            "<b>Año:</b> %{x}<br>" +
+            "<b>PIB:</b> %{y}<extra></extra>"
+    };
+
+    const proyectado = {
+        x: aniosProyectados,
+        y: pibProyectado,
+        mode: "lines+markers",
+        name: "PIB Proyectado",
+        line: { color: "orange", width: 3, dash: "dash" },
+        marker: { size: 7 },
+        hovertemplate:
+            "<b>Año (proyección):</b> %{x}<br>" +
+            "<b>PIB:</b> %{y}<extra></extra>"
+    };
+
+    // ======================
+    // LAYOUT
+    // ======================
+    const layout = {
+        xaxis: { title: "Año" },
+        yaxis: { title: "PIB" },
+        hoverlabel: {
+            bgcolor: "white",
+            bordercolor: "black",
+            font: { size: 14 }
+        },
+        legend: {
+            orientation: "h",
+            x: 0.5,
+            xanchor: "center",
+            y: -0.2
+        },
+        margin: { t: 40, b: 80 }
+    };
+
+    Plotly.newPlot(
+        "grafico",
+        [historico, proyectado],
+        layout,
+        { responsive: true }
+    );
+</script>
+
 </body>
 </html>
-
